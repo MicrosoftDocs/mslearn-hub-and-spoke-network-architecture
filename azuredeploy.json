@@ -4,54 +4,31 @@
     "parameters": {
         "virtualNetworks_hubVnet_name": {
             "defaultValue": "hubVnet",
-            "type": "String"
+            "type": "string"
         },
         "virtualNetworks_webVnet_name": {
             "defaultValue": "webVnet",
-            "type": "String"
-        },
-        "azureFirewalls_AzFirewall_name": {
-            "defaultValue": "AzFirewall",
-            "type": "String"
+            "type": "string"
         },
         "virtualNetworks_quoteVnet_name": {
             "defaultValue": "quoteVnet",
-            "type": "String"
-        },
-        "publicIPAddresses_firewallIP_name": {
-            "defaultValue": "firewallIP",
-            "type": "String"
+            "type": "string"
         },
         "networkSecurityGroups_hub_nsg_name": {
             "defaultValue": "hub-nsg",
-            "type": "String"
+            "type": "string"
         },
         "networkSecurityGroups_web_nsg_name": {
             "defaultValue": "web-nsg",
-            "type": "String"
-        },
-        "ddosProtectionPlans_PreventDDOS_name": {
-            "defaultValue": "PreventDDOS",
-            "type": "String"
+            "type": "string"
         },
         "networkSecurityGroups_quote_nsg_name": {
             "defaultValue": "quote-nsg",
-            "type": "String"
-        },
-        "publicIPAddresses_hubVpnGatewayPublicIp_name": {
-            "defaultValue": "hubVpnGatewayPublicIp",
-            "type": "String"
+            "type": "string"
         }
     },
     "variables": {},
     "resources": [
-        {
-            "type": "Microsoft.Network/ddosProtectionPlans",
-            "apiVersion": "2019-06-01",
-            "name": "[parameters('ddosProtectionPlans_PreventDDOS_name')]",
-            "location": "[resourceGroup().location]",
-            "properties": {}
-        },
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-06-01",
@@ -410,39 +387,6 @@
             }
         },
         {
-            "type": "Microsoft.Network/publicIPAddresses",
-            "apiVersion": "2019-06-01",
-            "name": "[parameters('publicIPAddresses_firewallIP_name')]",
-            "location": "[resourceGroup().location]",
-            "sku": {
-                "name": "Standard",
-                "tier": "Regional"
-            },
-            "properties": {
-                "ipAddress": "20.186.85.16",
-                "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Static",
-                "idleTimeoutInMinutes": 4,
-                "ipTags": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/publicIPAddresses",
-            "apiVersion": "2019-06-01",
-            "name": "[parameters('publicIPAddresses_hubVpnGatewayPublicIp_name')]",
-            "location": "[resourceGroup().location]",
-            "sku": {
-                "name": "Basic",
-                "tier": "Regional"
-            },
-            "properties": {
-                "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Dynamic",
-                "idleTimeoutInMinutes": 4,
-                "ipTags": []
-            }
-        },
-        {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-06-01",
             "name": "[parameters('virtualNetworks_hubVnet_name')]",
@@ -599,35 +543,6 @@
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
-            }
-        },
-        {
-            "type": "Microsoft.Network/azureFirewalls",
-            "apiVersion": "2019-06-01",
-            "name": "[parameters('azureFirewalls_AzFirewall_name')]",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_firewallIP_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_hubVnet_name'), 'AzureFirewallSubnet')]"
-            ],
-            "properties": {
-                "threatIntelMode": "Alert",
-                "ipConfigurations": [
-                    {
-                        "name": "IpConf",
-                        "properties": {
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_firewallIP_name'))]"
-                            },
-                            "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_hubVnet_name'), 'AzureFirewallSubnet')]"
-                            }
-                        }
-                    }
-                ],
-                "networkRuleCollections": [],
-                "applicationRuleCollections": [],
-                "natRuleCollections": []
             }
         },
         {

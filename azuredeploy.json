@@ -3,12 +3,12 @@
     "contentVersion": "1.0.0.0",
     "parameters": { },
     "variables": {
-        "virtualNetworks_hubVnet_name": "hubVnet",
-        "virtualNetworks_webVnet_name": "webVnet",
-        "virtualNetworks_quoteVnet_name": "quoteVnet",
-        "networkSecurityGroups_hub_nsg_name": "hub-nsg",
-        "networkSecurityGroups_web_nsg_name": "web-nsg",
-        "networkSecurityGroups_quote_nsg_name": "quote-nsg"
+        "virtualNetworks_hubVnet_name": "HubVnet",
+        "virtualNetworks_webVnet_name": "WebVnet",
+        "virtualNetworks_quoteVnet_name": "QuoteVnet",
+        "networkSecurityGroups_hub_nsg_name": "HubNsg",
+        "networkSecurityGroups_web_nsg_name": "WebNsg",
+        "networkSecurityGroups_quote_nsg_name": "QuoteNsg"
     },
     "resources": [
         {

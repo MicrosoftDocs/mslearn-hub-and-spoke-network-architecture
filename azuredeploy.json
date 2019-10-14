@@ -41,9 +41,6 @@
         "publicIPAddresses_hubVpnGatewayPublicIp_name": {
             "defaultValue": "hubVpnGatewayPublicIp",
             "type": "String"
-        },
-        "location":{
-            "default
         }
     },
     "variables": {},

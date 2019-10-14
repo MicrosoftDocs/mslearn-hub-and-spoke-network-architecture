@@ -410,7 +410,7 @@
                     {
                         "name": "DMZSubnet",
                         "properties": {
-                            "addressPrefix": "192.168.3.0/24",
+                            "addressPrefix": "192.168.0.0/24",
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",
                             "privateLinkServiceNetworkPolicies": "Enabled"
@@ -429,7 +429,7 @@
                     {
                         "name": "GatewaySubnet",
                         "properties": {
-                            "addressPrefix": "192.168.5.0/27",
+                            "addressPrefix": "192.168.3.0/27",
                             "serviceEndpoints": [],
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",

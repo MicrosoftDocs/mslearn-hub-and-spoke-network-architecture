@@ -1,38 +1,20 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "virtualNetworks_hubVnet_name": {
-            "defaultValue": "hubVnet",
-            "type": "string"
-        },
-        "virtualNetworks_webVnet_name": {
-            "defaultValue": "webVnet",
-            "type": "string"
-        },
-        "virtualNetworks_quoteVnet_name": {
-            "defaultValue": "quoteVnet",
-            "type": "string"
-        },
-        "networkSecurityGroups_hub_nsg_name": {
-            "defaultValue": "hub-nsg",
-            "type": "string"
-        },
-        "networkSecurityGroups_web_nsg_name": {
-            "defaultValue": "web-nsg",
-            "type": "string"
-        },
-        "networkSecurityGroups_quote_nsg_name": {
-            "defaultValue": "quote-nsg",
-            "type": "string"
-        }
+    "parameters": { },
+    "variables": {
+        "virtualNetworks_hubVnet_name": "hubVnet",
+        "virtualNetworks_webVnet_name": "webVnet",
+        "virtualNetworks_quoteVnet_name": "quoteVnet",
+        "networkSecurityGroups_hub_nsg_name": "hub-nsg",
+        "networkSecurityGroups_web_nsg_name": "web-nsg",
+        "networkSecurityGroups_quote_nsg_name": "quote-nsg"
     },
-    "variables": {},
     "resources": [
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-06-01",
-            "name": "[parameters('networkSecurityGroups_hub_nsg_name')]",
+            "name": "[variables('networkSecurityGroups_hub_nsg_name')]",
             "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [],
@@ -151,7 +133,7 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-06-01",
-            "name": "[parameters('networkSecurityGroups_quote_nsg_name')]",
+            "name": "[variables('networkSecurityGroups_quote_nsg_name')]",
             "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [],
@@ -270,7 +252,7 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-06-01",
-            "name": "[parameters('networkSecurityGroups_web_nsg_name')]",
+            "name": "[variables('networkSecurityGroups_web_nsg_name')]",
             "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [],
@@ -389,10 +371,10 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-06-01",
-            "name": "[parameters('virtualNetworks_hubVnet_name')]",
+            "name": "[variables('virtualNetworks_hubVnet_name')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_hub_nsg_name'))]"
             ],
             "properties": {
                 "addressSpace": {
@@ -406,7 +388,7 @@
                         "properties": {
                             "addressPrefix": "192.168.1.0/24",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_hub_nsg_name'))]"
                             },
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",
@@ -418,7 +400,7 @@
                         "properties": {
                             "addressPrefix": "192.168.4.0/22",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_hub_nsg_name'))]"
                             },
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",
@@ -453,10 +435,10 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-06-01",
-            "name": "[parameters('virtualNetworks_quoteVnet_name')]",
+            "name": "[variables('virtualNetworks_quoteVnet_name')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_quote_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_quote_nsg_name'))]"
             ],
             "properties": {
                 "addressSpace": {
@@ -470,7 +452,7 @@
                         "properties": {
                             "addressPrefix": "10.50.0.0/16",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_quote_nsg_name'))]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_quote_nsg_name'))]"
                             },
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",
@@ -486,10 +468,10 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-06-01",
-            "name": "[parameters('virtualNetworks_webVnet_name')]",
+            "name": "[variables('virtualNetworks_webVnet_name')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_web_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_web_nsg_name'))]"
             ],
             "properties": {
                 "addressSpace": {
@@ -503,7 +485,7 @@
                         "properties": {
                             "addressPrefix": "10.100.0.0/16",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_web_nsg_name'))]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_web_nsg_name'))]"
                             },
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",
@@ -519,9 +501,9 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('virtualNetworks_hubVnet_name'), '/AzureFirewallSubnet')]",
+            "name": "[concat(variables('virtualNetworks_hubVnet_name'), '/AzureFirewallSubnet')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_hubVnet_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_hubVnet_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.2.0/24",
@@ -534,9 +516,9 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('virtualNetworks_hubVnet_name'), '/DMZSubnet')]",
+            "name": "[concat(variables('virtualNetworks_hubVnet_name'), '/DMZSubnet')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_hubVnet_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_hubVnet_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.0.0/25",
@@ -548,15 +530,15 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('virtualNetworks_hubVnet_name'), '/ManagementSubnet')]",
+            "name": "[concat(variables('virtualNetworks_hubVnet_name'), '/ManagementSubnet')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_hubVnet_name'))]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_hubVnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_hub_nsg_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.1.0/24",
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_hub_nsg_name'))]"
                 },
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
@@ -566,15 +548,15 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('virtualNetworks_hubVnet_name'), '/SharedSubnet')]",
+            "name": "[concat(variables('virtualNetworks_hubVnet_name'), '/SharedSubnet')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_hubVnet_name'))]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_hubVnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_hub_nsg_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.4.0/22",
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_hub_nsg_name'))]"
                 },
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
@@ -584,15 +566,15 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('virtualNetworks_quoteVnet_name'), '/WorkloadSubnet')]",
+            "name": "[concat(variables('virtualNetworks_quoteVnet_name'), '/WorkloadSubnet')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_quoteVnet_name'))]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_quote_nsg_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_quoteVnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_quote_nsg_name'))]"
             ],
             "properties": {
                 "addressPrefix": "10.50.0.0/16",
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_quote_nsg_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_quote_nsg_name'))]"
                 },
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
@@ -602,15 +584,15 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('virtualNetworks_webVnet_name'), '/WorkloadSubnet')]",
+            "name": "[concat(variables('virtualNetworks_webVnet_name'), '/WorkloadSubnet')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_webVnet_name'))]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_web_nsg_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_webVnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_web_nsg_name'))]"
             ],
             "properties": {
                 "addressPrefix": "10.100.0.0/16",
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_web_nsg_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_web_nsg_name'))]"
                 },
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",

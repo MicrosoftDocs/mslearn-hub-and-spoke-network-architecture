@@ -540,6 +540,20 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-06-01",
+            "name": "[concat(variables('virtualNetworks_hubVnet_name'), '/GatewaySubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_hubVnet_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "192.168.3.0/27",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2019-06-01",
             "name": "[concat(variables('virtualNetworks_hubVnet_name'), '/ManagementSubnet')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_hubVnet_name'))]",

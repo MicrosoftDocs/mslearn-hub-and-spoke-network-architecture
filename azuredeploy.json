@@ -41,6 +41,9 @@
         "publicIPAddresses_hubVpnGatewayPublicIp_name": {
             "defaultValue": "hubVpnGatewayPublicIp",
             "type": "String"
+        },
+        "location":{
+            "default
         }
     },
     "variables": {},
@@ -49,24 +52,20 @@
             "type": "Microsoft.Network/ddosProtectionPlans",
             "apiVersion": "2019-06-01",
             "name": "[parameters('ddosProtectionPlans_PreventDDOS_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "properties": {}
         },
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-06-01",
             "name": "[parameters('networkSecurityGroups_hub_nsg_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "974fb452-11ee-4bb5-b83f-6ae718883c04",
                 "securityRules": [],
                 "defaultSecurityRules": [
                     {
                         "name": "AllowVnetInBound",
-                        "etag": "W/\"685a2570-9943-42e5-936b-593d4b8e6726\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow inbound traffic from all VMs in VNET",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -84,9 +83,7 @@
                     },
                     {
                         "name": "AllowAzureLoadBalancerInBound",
-                        "etag": "W/\"685a2570-9943-42e5-936b-593d4b8e6726\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow inbound traffic from azure load balancer",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -104,9 +101,7 @@
                     },
                     {
                         "name": "DenyAllInBound",
-                        "etag": "W/\"685a2570-9943-42e5-936b-593d4b8e6726\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Deny all inbound traffic",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -124,9 +119,7 @@
                     },
                     {
                         "name": "AllowVnetOutBound",
-                        "etag": "W/\"685a2570-9943-42e5-936b-593d4b8e6726\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow outbound traffic from all VMs to all VMs in VNET",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -144,9 +137,7 @@
                     },
                     {
                         "name": "AllowInternetOutBound",
-                        "etag": "W/\"685a2570-9943-42e5-936b-593d4b8e6726\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow outbound traffic from all VMs to Internet",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -164,9 +155,7 @@
                     },
                     {
                         "name": "DenyAllOutBound",
-                        "etag": "W/\"685a2570-9943-42e5-936b-593d4b8e6726\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Deny all outbound traffic",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -189,17 +178,13 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-06-01",
             "name": "[parameters('networkSecurityGroups_quote_nsg_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "87da4fc0-c32c-4041-9913-48488ad8422e",
                 "securityRules": [],
                 "defaultSecurityRules": [
                     {
                         "name": "AllowVnetInBound",
-                        "etag": "W/\"7c2aa3ca-748d-45db-bdc9-0e5ba1f242ab\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow inbound traffic from all VMs in VNET",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -217,9 +202,7 @@
                     },
                     {
                         "name": "AllowAzureLoadBalancerInBound",
-                        "etag": "W/\"7c2aa3ca-748d-45db-bdc9-0e5ba1f242ab\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow inbound traffic from azure load balancer",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -237,9 +220,7 @@
                     },
                     {
                         "name": "DenyAllInBound",
-                        "etag": "W/\"7c2aa3ca-748d-45db-bdc9-0e5ba1f242ab\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Deny all inbound traffic",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -257,9 +238,7 @@
                     },
                     {
                         "name": "AllowVnetOutBound",
-                        "etag": "W/\"7c2aa3ca-748d-45db-bdc9-0e5ba1f242ab\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow outbound traffic from all VMs to all VMs in VNET",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -277,9 +256,7 @@
                     },
                     {
                         "name": "AllowInternetOutBound",
-                        "etag": "W/\"7c2aa3ca-748d-45db-bdc9-0e5ba1f242ab\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow outbound traffic from all VMs to Internet",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -297,9 +274,7 @@
                     },
                     {
                         "name": "DenyAllOutBound",
-                        "etag": "W/\"7c2aa3ca-748d-45db-bdc9-0e5ba1f242ab\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Deny all outbound traffic",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -322,17 +297,13 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-06-01",
             "name": "[parameters('networkSecurityGroups_web_nsg_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "105d7e09-4195-4ab8-8192-e9caab81b2cb",
                 "securityRules": [],
                 "defaultSecurityRules": [
                     {
                         "name": "AllowVnetInBound",
-                        "etag": "W/\"b8c477ff-ec14-4d30-b199-f4d1c91803aa\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow inbound traffic from all VMs in VNET",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -350,9 +321,7 @@
                     },
                     {
                         "name": "AllowAzureLoadBalancerInBound",
-                        "etag": "W/\"b8c477ff-ec14-4d30-b199-f4d1c91803aa\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow inbound traffic from azure load balancer",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -370,9 +339,7 @@
                     },
                     {
                         "name": "DenyAllInBound",
-                        "etag": "W/\"b8c477ff-ec14-4d30-b199-f4d1c91803aa\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Deny all inbound traffic",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -390,9 +357,7 @@
                     },
                     {
                         "name": "AllowVnetOutBound",
-                        "etag": "W/\"b8c477ff-ec14-4d30-b199-f4d1c91803aa\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow outbound traffic from all VMs to all VMs in VNET",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -410,9 +375,7 @@
                     },
                     {
                         "name": "AllowInternetOutBound",
-                        "etag": "W/\"b8c477ff-ec14-4d30-b199-f4d1c91803aa\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Allow outbound traffic from all VMs to Internet",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -430,9 +393,7 @@
                     },
                     {
                         "name": "DenyAllOutBound",
-                        "etag": "W/\"b8c477ff-ec14-4d30-b199-f4d1c91803aa\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "description": "Deny all outbound traffic",
                             "protocol": "*",
                             "sourcePortRange": "*",
@@ -455,14 +416,12 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-06-01",
             "name": "[parameters('publicIPAddresses_firewallIP_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Standard",
                 "tier": "Regional"
             },
             "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "9ddb0382-0819-4493-8976-61cdcad007f0",
                 "ipAddress": "20.186.85.16",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Static",
@@ -474,14 +433,12 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2019-06-01",
             "name": "[parameters('publicIPAddresses_hubVpnGatewayPublicIp_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Basic",
                 "tier": "Regional"
             },
             "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "8619f9d2-5636-40dc-82c7-b3f23f436436",
                 "publicIPAddressVersion": "IPv4",
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
@@ -492,13 +449,11 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-06-01",
             "name": "[parameters('virtualNetworks_hubVnet_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "02fc23bf-2974-468a-ae81-7da04cf04a37",
                 "addressSpace": {
                     "addressPrefixes": [
                         "192.168.0.0/20"
@@ -507,9 +462,7 @@
                 "subnets": [
                     {
                         "name": "ManagementSubnet",
-                        "etag": "W/\"309367c8-871b-422d-bad0-99d03c549dbb\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "addressPrefix": "192.168.1.0/24",
                             "networkSecurityGroup": {
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
@@ -521,9 +474,7 @@
                     },
                     {
                         "name": "SharedSubnet",
-                        "etag": "W/\"309367c8-871b-422d-bad0-99d03c549dbb\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "addressPrefix": "192.168.4.0/22",
                             "networkSecurityGroup": {
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
@@ -535,9 +486,7 @@
                     },
                     {
                         "name": "DMZSubnet",
-                        "etag": "W/\"309367c8-871b-422d-bad0-99d03c549dbb\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "addressPrefix": "192.168.0.0/25",
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",
@@ -546,9 +495,7 @@
                     },
                     {
                         "name": "AzureFirewallSubnet",
-                        "etag": "W/\"309367c8-871b-422d-bad0-99d03c549dbb\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "addressPrefix": "192.168.2.0/24",
                             "serviceEndpoints": [],
                             "delegations": [],
@@ -566,13 +513,11 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-06-01",
             "name": "[parameters('virtualNetworks_quoteVnet_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_quote_nsg_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "8936041b-3b15-4526-98ae-f458d40c28e4",
                 "addressSpace": {
                     "addressPrefixes": [
                         "10.50.0.0/16"
@@ -581,9 +526,7 @@
                 "subnets": [
                     {
                         "name": "WorkloadSubnet",
-                        "etag": "W/\"3a8dce6a-4611-460c-9285-e2cbe8643a07\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "addressPrefix": "10.50.0.0/16",
                             "networkSecurityGroup": {
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_quote_nsg_name'))]"
@@ -603,13 +546,11 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2019-06-01",
             "name": "[parameters('virtualNetworks_webVnet_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_web_nsg_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
-                "resourceGuid": "cd1b4b54-855b-420c-88bd-64300a141313",
                 "addressSpace": {
                     "addressPrefixes": [
                         "10.100.0.0/16"
@@ -618,9 +559,7 @@
                 "subnets": [
                     {
                         "name": "WorkloadSubnet",
-                        "etag": "W/\"e8349504-79a5-431c-838a-5b87fb57450c\"",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "addressPrefix": "10.100.0.0/16",
                             "networkSecurityGroup": {
                                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_web_nsg_name'))]"
@@ -644,7 +583,6 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_hubVnet_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
                 "addressPrefix": "192.168.2.0/24",
                 "serviceEndpoints": [],
                 "delegations": [],
@@ -660,7 +598,6 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_hubVnet_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
                 "addressPrefix": "192.168.0.0/25",
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
@@ -671,19 +608,17 @@
             "type": "Microsoft.Network/azureFirewalls",
             "apiVersion": "2019-06-01",
             "name": "[parameters('azureFirewalls_AzFirewall_name')]",
-            "location": "eastus2",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_firewallIP_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_hubVnet_name'), 'AzureFirewallSubnet')]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
                 "threatIntelMode": "Alert",
                 "ipConfigurations": [
                     {
                         "name": "IpConf",
                         "properties": {
-                            "provisioningState": "Succeeded",
                             "publicIPAddress": {
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_firewallIP_name'))]"
                             },
@@ -707,7 +642,6 @@
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
                 "addressPrefix": "192.168.1.0/24",
                 "networkSecurityGroup": {
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
@@ -726,7 +660,6 @@
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
                 "addressPrefix": "192.168.4.0/22",
                 "networkSecurityGroup": {
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_hub_nsg_name'))]"
@@ -745,7 +678,6 @@
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_quote_nsg_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
                 "addressPrefix": "10.50.0.0/16",
                 "networkSecurityGroup": {
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_quote_nsg_name'))]"
@@ -764,7 +696,6 @@
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_web_nsg_name'))]"
             ],
             "properties": {
-                "provisioningState": "Succeeded",
                 "addressPrefix": "10.100.0.0/16",
                 "networkSecurityGroup": {
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_web_nsg_name'))]"

@@ -429,7 +429,7 @@
                     {
                         "name": "GatewaySubnet",
                         "properties": {
-                            "addressPrefix": "192.168.0.0/27",
+                            "addressPrefix": "192.168.5.0/27",
                             "serviceEndpoints": [],
                             "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",
